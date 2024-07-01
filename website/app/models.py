@@ -38,4 +38,6 @@ class manga(models.Model):
     finish=models.BooleanField(default=False,verbose_name="完成阅读")
     myprogress=models.CharField(max_length=20,verbose_name="我的进度", blank=True, null=True)
     pic=models.ImageField(upload_to='Base/manga/pic', blank=True, null=True)
+
+
 # Create your models here.
