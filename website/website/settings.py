@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -72,15 +72,38 @@ WSGI_APPLICATION = "website.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# docker ver
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "website",
+#         "USER": "root",
+#         "PASSWORD": "11031103",
+#         "HOST": "db",
+#         "PORT": 3306,
+#     }
+#
+# }
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "website",
+        "USER": "root",
+        "PASSWORD": "11031103",
+        #TODO:修改HOST
+        "HOST": "10.112.205.145",#填写数据库地址为10.****
+        "PORT": 3306,
     }
+
 }
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
 
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
