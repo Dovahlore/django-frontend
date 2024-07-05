@@ -7,7 +7,7 @@ from app.utils.checkcode import check_code
 from django.urls import reverse
 
 class loginForm(forms.Form):
-    user = forms.CharField(label="管理员账号", max_length=20, required=True,
+    username = forms.CharField(label="管理员账号", max_length=20, required=True,
                            widget=forms.widgets.TextInput(
                                attrs={'placeholder': '输入账号', 'class': 'form-control form-control-lg'}),
                            error_messages={"required": "账户输入不能为空"})
@@ -52,7 +52,7 @@ def login(request):
                 return render(request, "login.html", { "form": form, "message": message})
                 # 跳转到管理界面
             else:
-                request.session["info"] = {'id': admin.id, 'user': admin.user}
+                request.session["info"] = {'id': admin.id, 'username': admin.username}
                 request.session.set_expiry(60*24*60*30)
                 next_url = request.GET.get('next', reverse('meters'))
                 return redirect(next_url)
