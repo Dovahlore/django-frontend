@@ -44,19 +44,19 @@
             </ul>
             <form class="d-flex" role="search">
 
-               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="/organize" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">
-                        用户
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/upload">注销</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="/organize" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">
+                            用户
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/upload">注销</a></li>
 
-                    </ul>
-                </li>
-            </ul>
+                        </ul>
+                    </li>
+                </ul>
             </form>
         </div>
     </div>
@@ -64,15 +64,33 @@
 <div style="margin:90px 40px;">
 
 
+    <div>
+        <h1>
+            annate
+        </h1>
 
-<h1>
-    annate
-</h1>
-<h1>
-    servers
+        {% for antenna in antennas %}
+        <div style="border-radius:20px;box-shadow: 3px 3px 6px #666;height:100px;padding:30px;margin:30px;">
+            <h5>
+                天线ID:{{antenna.id}}
+            </h5>
+            <div>
+                双向波束：{{antenna.dual_beam}}
+                可用双向波束：{{antenna.available_dual_beam}}
 
-</h1>
+                收波束：{{antenna.rec_beam}}
+                可用收波束：{{antenna.available_rec_beam}}
+            </div>
+        </div>
+        {% endfor %}
+
+
     </div>
+    <h1>
+        servers
+
+    </h1>
+</div>
 <div>
 
 

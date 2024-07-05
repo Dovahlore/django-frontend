@@ -7,7 +7,6 @@ class Authorization(MiddlewareMixin):
         if request.path_info.find("media/")!=-1 or  request.path_info.find("s/")!=-1or request.path_info=="/":
             return
         info_dict=request.session.get('info')
-
         if info_dict:
             return
         else:
