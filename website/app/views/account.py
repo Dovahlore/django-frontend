@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django import forms
-import random
-from dovahwall.utils.encrypt import md5
-import dovahwall.models as models
-from dovahwall.utils.checkcode import check_code
+
+from app.utils.encrypt import md5
+import app.models as models
+from app.utils.checkcode import check_code
 from django.urls import reverse
 
 class loginForm(forms.Form):
@@ -25,47 +25,13 @@ class loginForm(forms.Form):
         return md5(password)
 
 
-def choose_bg():
-    x = random.choice(
-        ["bird2.jpg",
-"bird4.jpg",
-"dogdigging-1.jpg",
-"DSC_0684.jpg",
-"DSC_0697_1.jpg",
-"DSC_0762.jpg",
-"DSC_0803.jpg",
-"DSC_0826.jpg",
-"DSC_0957-已增强-降噪-1.jpg",
-"DSC_1106-已增强-降噪.jpg",
-"DSC_1109-已增强-降噪.jpg",
-"DSC_1111-已增强-降噪.jpg",
-"DSC_1119.jpg",
-"DSC_1132-已增强-降噪.jpg",
-"DSC_1140.jpg",
-"DSC_1157-已增强-降噪.jpg",
-"DSC_1168-已增强-降噪.jpg",
-"DSC_1276-已增强-降噪.jpg",
-"DSC_1280-已增强-降噪-1.jpg",
-"landscape-1.jpg",
-"mount1.jpg",
-"mouse-1.jpg",
-"operator-1.jpg",
-"peak.jpg",
-"sunsetcamp-1.jpg",
-"sunsetpolls-1.jpg",
-"threehillundershade-1.jpg",
-"石雕.jpg",
-"赛博都市.jpg",])
-    str = "/static/img/bg/" + x
-    return str
 
 
 def login(request):
     message=""
     if request.method == "GET":
         form = loginForm()
-
-        return render(request, "login.html", {"bg": choose_bg(), "form": form, "message":  message})
+        return render(request, "login.html", { "form": form, "message":  message})
     elif request.method == "POST":
         form = loginForm(data=request.POST)
         if form.is_valid():
@@ -74,21 +40,21 @@ def login(request):
             image_code=request.session.get('image_code',"")
             if image_code =="":
                 message="验证码超时失效，请刷新页面后重试！"
-                return render(request, "login.html", {"bg": choose_bg(), "form": form, "message": message})
+                return render(request, "login.html", { "form": form, "message": message})
             if image_code.upper()!=user_input_code.upper():
                 message="验证码错误！"
-                return render(request, "login.html", {"bg": choose_bg(), "form": form, "message": message})
+                return render(request, "login.html", { "form": form, "message": message})
 
             admin = models.admin.objects.filter(**form.cleaned_data).first()
             if not admin:
 
                 message="账户密码验证失败！"
-                return render(request, "login.html", {"bg": choose_bg(), "form": form, "message": message})
+                return render(request, "login.html", { "form": form, "message": message})
                 # 跳转到管理界面
             else:
                 request.session["info"] = {'id': admin.id, 'user': admin.user}
                 request.session.set_expiry(60*24*60*30)
-                next_url = request.GET.get('next', reverse('mainpage'))
+                next_url = request.GET.get('next', reverse('/'))
                 return redirect(next_url)
 
 

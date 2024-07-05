@@ -1,10 +1,6 @@
+
 from django.db import models
-import uuid
-from django.db import models
-from PIL import Image,ImageOps
-from PIL.ExifTags import TAGS
-import datetime
-import os
+
 # Create your models here.
 
 #todo 建立数据库
