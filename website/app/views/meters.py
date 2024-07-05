@@ -4,7 +4,7 @@ from django import forms
 from app.utils.encrypt import md5
 import app.models as models
 from app.utils.checkcode import check_code
-from djangiso.urls import reverse
+from django.urls import reverse
 
 def  meter(request):
     return

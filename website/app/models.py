@@ -7,8 +7,8 @@ from django.db import models
 class admin(models.Model):
     user = models.CharField(max_length=32)
     password = models.CharField(max_length=32)
-
     created_at = models.DateTimeField(auto_now_add=True)
+
     
 
 
