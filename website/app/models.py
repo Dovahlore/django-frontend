@@ -1,6 +1,6 @@
 
 from django.db import models
-
+import uuid
 # Create your models here.
 
 #todo 建立数据库
@@ -84,6 +84,12 @@ class log(models.Model):
 #     author=models.CharField(max_length=20,verbose_name="作者",default="")
 #     tags = models.ManyToManyField(to=tag,verbose_name="标签", blank=True)#外键到tag
 #     STATUS_CHOICES = [
+#     finish=models.BooleanField(default=False,verbose_name="完成阅读")
+#     myprogress=models.CharField(max_length=20,verbose_name="我的进度", blank=True, null=True)
+#     pic=models.ImageField(upload_to='Base/manga/pic', blank=True, null=True)
+
+
+# Create your models here.
 #         ('连载中', '连载中'),
 #         ('停更', '停更'),
 #         ('完结', '完结'),
@@ -93,9 +99,3 @@ class log(models.Model):
 #     status=models.CharField(max_length=10, choices=STATUS_CHOICES,default='SER',verbose_name="连载状态")
 #     created_at = models.DateTimeField(auto_now_add=True,verbose_name="创建时间")
 #     review=models.TextField(verbose_name="我的想法", blank=True, null=True)
-#     finish=models.BooleanField(default=False,verbose_name="完成阅读")
-#     myprogress=models.CharField(max_length=20,verbose_name="我的进度", blank=True, null=True)
-#     pic=models.ImageField(upload_to='Base/manga/pic', blank=True, null=True)
-
-
-# Create your models here.

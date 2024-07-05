@@ -54,7 +54,7 @@ def login(request):
             else:
                 request.session["info"] = {'id': admin.id, 'user': admin.user}
                 request.session.set_expiry(60*24*60*30)
-                next_url = request.GET.get('next', reverse('/'))
+                next_url = request.GET.get('next', reverse('meters'))
                 return redirect(next_url)
 
 

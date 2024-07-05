@@ -7,4 +7,6 @@ from app.utils.checkcode import check_code
 from django.urls import reverse
 
 def  meter(request):
-    return
+
+
+    return render(request, "meter.html" )
