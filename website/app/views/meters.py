@@ -5,6 +5,6 @@ import app.models as models
 
 def  meter(request):
     antennas=models.antenna.objects.all()
-    print(antennas)
+    servers = models.server.objects.all()
 
-    return render(request, "meter.html",{"antennas":antennas} )
+    return render(request, "meter.html",{"antennas":antennas,"servers":servers} )
