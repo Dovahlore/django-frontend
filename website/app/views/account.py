@@ -57,7 +57,11 @@ def login(request):
                 next_url = request.GET.get('next', reverse('meters'))
                 return redirect(next_url)
 
-
+def logout(request):
+    # 清除会话数据
+    request.session.flush()
+    # 重定向到登录页面或主页
+    return redirect('/s/login')
 from io import BytesIO
 
 

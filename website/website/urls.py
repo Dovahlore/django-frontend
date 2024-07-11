@@ -21,6 +21,7 @@ from app.views import account, meters, task
 urlpatterns = [
     path("s/check/code", account.image_code),
     path("s/login", account.login),
+    path("s/logout", account.logout),
     path("meters", meters.meter, name='meters'),
     path("tasks", task.task, name='tasks'),
     path("get_meta_tasks", task.get_meta_tasks),
