@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import account, meters
+from app.views import account, meters, task
 
 urlpatterns = [
     path("s/check/code", account.image_code),
     path("s/login", account.login),
-    path("meters", meters.meter,name='meters'),
+    path("meters", meters.meter, name='meters'),
+    path("tasks", task.task, name='tasks'),
+    path("get_meta_tasks", task.get_meta_tasks),
+
 ]

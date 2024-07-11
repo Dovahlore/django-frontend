@@ -37,7 +37,8 @@ class task(models.Model):
     task_name = models.CharField(max_length=32)  # 任务名
     beam_type = models.IntegerField(default=0)  # 波束类型
     meta_task_num = models.IntegerField(default=0)  # 元任务数量
-
+    def __str__(self):
+        return self.task_name
 
 class meta_task(models.Model):
     # 元任务id
@@ -46,6 +47,8 @@ class meta_task(models.Model):
     GPU = models.IntegerField(default=0)  # 元任务所需加速卡数量
     belong_task = models.ForeignKey(task, on_delete=models.CASCADE)  # 所属任务id
 
+    def __str__(self):
+        return self.meta_task_name
 
 class task_list(models.Model):
     # 任务实例id
@@ -60,7 +63,7 @@ class task_list(models.Model):
 
 class meta_task_list(models.Model):
     # 任务实例id
-    task_id = models.ForeignKey(task_list, on_delete=models.CASCADE)  # 外键到task_list，指明该元任务所属的任务实例
+    belong_to_task = models.ForeignKey(task_list, on_delete=models.CASCADE)  # 外键到task_list，指明该元任务所属的任务实例
     server = models.ForeignKey(server, on_delete=models.CASCADE)  # 外键到server,该元任务所属的任务实例
     meta_task = models.ForeignKey(meta_task, on_delete=models.CASCADE)  # 外键到meta_task,该元任务的类型
 
