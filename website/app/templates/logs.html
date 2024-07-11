@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>消息页</title>
+
+    <link href="{% static 'bootstrap/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'fontawesome/fontawesome-free-5.15.4-web/css/all.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;position:fixed;top:0;width:100%;z-index:10">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">管理系统</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link  active" href="/meters">资源仪表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tasks">任务列表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logs">消息日志</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/meters">任务抢占</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/organize" id="navbarDropdown2" role="button"
+                       data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">
+                        temp
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <li><a class="dropdown-item" href="/">实时</a></li>
+                        <li><a class="dropdown-item" href="/"></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="/organize" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">
+                            用户
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/s/logout">注销</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</nav>
+<div style="margin:90px 40px;">
+
+
+    <div>
+        <h1>
+            天线池
+        </h1>
+
+        {% for antenna in antennas %}
+        <div style="border-radius:20px;box-shadow: 3px 3px 6px #666;height:100px;padding:30px;margin:30px;">
+            <h5>
+                天线ID:{{antenna.id}}
+            </h5>
+            <div>
+                双向波束：{{antenna.dual_beam}}
+                可用双向波束：{{antenna.available_dual_beam}}
+
+                收波束：{{antenna.rec_beam}}
+                可用收波束：{{antenna.available_rec_beam}}
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+    <h1>
+        服务器池
+    </h1>
+</div>
+<div>
+ {% for server in servers %}
+        <div style="border-radius:20px;box-shadow: 3px 3px 6px #666;height:100px;padding:30px;margin:30px;">
+            <h5>
+                服务器ID:{{server.id}}
+            </h5>
+            <div>
+                核心数：{{server.core}}
+                可用核心：{{server.available_core}}
+                核心数：{{server.GPU}}
+                可用核心：{{server.available_GPU}}
+            </div>
+        </div>
+        {% endfor %}
+
+</div>
+<script src="{% static 'jquery-3.7.1.min.js'%}"></script>
+<script src="{% static 'bootstrap/bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.min.js'%}"></script>
+
+</body>
+
+</html>

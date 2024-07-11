@@ -58,7 +58,13 @@ class task_list(models.Model):
     endtime = models.DateTimeField(auto_now=True)  # 任务结束时间戳
     antenna = models.ForeignKey(antenna, on_delete=models.CASCADE)  # 外键到Antenna表
     beam = models.IntegerField(default=0)  # 使用该天线的波束号
-    status = models.CharField(max_length=32)  # 该任务的状态
+    STATUS_CHOICES = [
+        ('运行中', '运行中'),
+        ('终止', '终止'),
+        ('运行结束', '运行结束'),
+        ('抢占结束', '抢占结束')
+    ]
+    status = models.CharField(max_length=32,choices=STATUS_CHOICES)  # 该任务的状态
 
 
 class meta_task_list(models.Model):
