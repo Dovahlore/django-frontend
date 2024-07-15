@@ -6,12 +6,10 @@ from django.core.paginator import Paginator
 from django import forms
 from django.db.models import Q
 
-
 class filter_tasks_form(forms.ModelForm):
     class Meta:
         model = models.task_list
         fields = ['status']
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['status'].required = False
@@ -19,12 +17,10 @@ class filter_tasks_form(forms.ModelForm):
         self.fields['status'].widget.attrs.update(
             {'style': 'width:200px;color:blue;border: 2px solid #000; margin-right:25px;', 'class': ' form-control'})
 
-
 def task(request):
     tasks = models.task_list.objects.select_related('task').all()  # 假设你的模型名称是TaskList
     form = filter_tasks_form()
     filters = Q()
-
     if request.method == 'POST':
         form = filter_tasks_form(request.POST)
         filters = Q()
@@ -33,12 +29,10 @@ def task(request):
             if form.cleaned_data.get('status'):
                 status = form.cleaned_data['status']
                 filters &= Q(status=status)
-
             tasks = tasks.filter(filters).distinct()
             message = "共%s条结果" % (len(tasks))
             paginator = Paginator(tasks, 20)
             tasks = paginator.get_page(page_number)
-
             return render(request, "tasks.html", {
                 "tasks": tasks,
                 'paginator': paginator,
@@ -48,9 +42,7 @@ def task(request):
     page_number = request.GET.get('page')
     status = request.GET.get('status')
     if status:
-
         filters &= Q(status=status)
-
         tasks = tasks.filter(filters).distinct()
         message = "共%s条结果" % (len(tasks))
         initial_data = {
@@ -60,9 +52,7 @@ def task(request):
     else:
         message = "共%s条结果" % (len(tasks))
     paginator = Paginator(tasks, 20)
-
     tasks = paginator.get_page(page_number)
-
     return render(request, "tasks.html", {
         "tasks": tasks,
         'paginator': paginator,
@@ -70,7 +60,6 @@ def task(request):
         "messages": message,
 
     })
-
 
 def get_meta_tasks(request):
     task_id = request.GET.get('task_id')

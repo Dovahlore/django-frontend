@@ -80,7 +80,7 @@ WSGI_APPLICATION = "website.wsgi.application"
 #         "USER": "root",
 #         "PASSWORD": "11031103",
 #         "HOST": "db",
-#         "PORT": 3306,
+#         "PORT": 33062,
 #     }
 #
 # }
